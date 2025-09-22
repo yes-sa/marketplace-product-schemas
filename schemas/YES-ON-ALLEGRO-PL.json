@@ -12,7 +12,7 @@
                 "items": {
                     "type": "object"
                 },
-                "minItems": 4
+                "minItems": 1
             },
             "sku": {
                 "type": "string"
