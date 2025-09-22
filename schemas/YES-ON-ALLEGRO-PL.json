@@ -1,3 +1,117 @@
 {
-  
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "definitions": {
+        "properties": {
+            "name": {
+                "type": "string",
+                "maxLength": 70
+            },
+            "images": {
+                "type": "array",
+                "items": {
+                    "type": "object"
+                },
+                "minItems": 4
+            },
+            "sku": {
+                "type": "string"
+            },
+            "description": {
+                "type": "string"
+            },
+            "gtin": {
+                "type": "integer",
+                "minimum": 5900000000000,
+                "maximum": 5999999999999
+            },
+            "finish_color": {
+                "type": "string"
+            },
+            "collection": {
+                "type": "string"
+            },
+            "product_type": {
+                "type": "string"
+            },
+            "tangle_type": {
+                "type": "string"
+            },
+            "for_whom": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "sales_channels": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "style": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "themes": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "occasion": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "ores": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "minItems": 1
+            },
+            "stones": {
+                "type": "array"
+            },
+            "description_collection": {
+                "type": "string"
+            },
+            "product_description_yes": {
+                "type": "string"
+            },
+            "size": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 300
+            }
+        },
+        "if": {
+            "properties": {
+                "product_type": {
+                    "const": "Bransoletka"
+                }
+            }
+        },
+        "then": {
+            "required": [
+                "tangle_type"
+            ]
+        },
+        "required": [
+            "name",
+            "sku",
+            "description",
+            "gtin",
+            "sales_channels",
+            "product_type",
+            "ores",
+            "images",
+            "description_collection",
+            "product_description_yes"
+        ]
+    }
 }
