@@ -281,7 +281,7 @@
       "name": "Przykladowy produkt",
       "description": "Opis produktu",
       "meta_title": "Meta title",
-      "meta_keywords": ["bizuteria, zloto"],
+      "meta_keywords": ["bizuteria", "zloto"],
       "meta_description": "Meta description",
       "price": 199.99,
       "published": true,
