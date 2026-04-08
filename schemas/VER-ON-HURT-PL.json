@@ -1,0 +1,311 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://verona-hurt.local/schemas/products_worker.schema.json",
+  "title": "ProductsWorker msg schema",
+  "description": "Schema waliduje wyłącznie msg z ProductsWorker, czyli JSON payload parsowany przez JSON.parse(msg, symbolize_names: true).",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "sku": {
+      "type": "string",
+      "minLength": 24,
+      "maxLength": 24
+    },
+    "parent_sku": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "meta_title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "meta_keywords": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "meta_description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "price": {
+      "type": [
+        "number",
+        "integer",
+        "null"
+      ]
+    },
+    "published": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "true",
+            "false",
+            "1",
+            "0",
+            "t",
+            "f",
+            "yes",
+            "no",
+            "on",
+            "off"
+          ]
+        },
+        {
+          "type": "integer",
+          "enum": [
+            0,
+            1
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "grouping_attributes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "size",
+          "stone_class",
+          "stone_weight"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "available_sizes": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          }
+        ]
+      }
+    },
+    "images": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "url": {
+            "type": "string",
+            "minLength": 1
+          },
+          "hover": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "stones": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "stone": {
+            "type": "string",
+            "minLength": 1
+          },
+          "class": {
+            "type": "string",
+            "minLength": 1
+          },
+          "weight": {
+            "oneOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "number"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "gtin": {
+      "type": [
+        "string",
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "sku",
+    "name"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "parent_sku"
+        ]
+      },
+      "then": {
+        "required": [
+          "grouping_attributes",
+          "available_sizes"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "grouping_attributes": {
+            "contains": {
+              "const": "stone_class"
+            }
+          }
+        },
+        "required": [
+          "grouping_attributes"
+        ]
+      },
+      "then": {
+        "required": [
+          "stones"
+        ],
+        "properties": {
+          "stones": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "class"
+              ],
+              "properties": {
+                "class": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "grouping_attributes": {
+            "contains": {
+              "const": "stone_weight"
+            }
+          }
+        },
+        "required": [
+          "grouping_attributes"
+        ]
+      },
+      "then": {
+        "required": [
+          "stones"
+        ],
+        "properties": {
+          "stones": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "weight"
+              ],
+              "properties": {
+                "weight": {
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "examples": [
+    {
+      "sku": "AAA-BBB-CCC-123456789012",
+      "parent_sku": "AAA-BBB-CCC-000000000000",
+      "name": "Przykladowy produkt",
+      "description": "Opis produktu",
+      "meta_title": "Meta title",
+      "meta_keywords": "bizuteria, zloto",
+      "meta_description": "Meta description",
+      "price": 199.99,
+      "published": true,
+      "grouping_attributes": [
+        "size",
+        "stone_class",
+        "stone_weight"
+      ],
+      "available_sizes": [
+        "12",
+        "14"
+      ],
+      "images": [
+        {
+          "url": "https://cdn.example.com/image-1.jpg"
+        },
+        {
+          "url": "https://cdn.example.com/image-2.jpg",
+          "hover": true
+        }
+      ],
+      "stones": [
+        {
+          "stone": "Diament",
+          "class": "SI",
+          "weight": "0.10"
+        }
+      ],
+      "gtin": "1234567890123"
+    }
+  ]
+}
