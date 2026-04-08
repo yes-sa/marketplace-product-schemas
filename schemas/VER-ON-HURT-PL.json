@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://verona-hurt.local/schemas/products_worker.schema.json",
   "title": "ProductsWorker msg schema",
   "description": "Schema waliduje wyłącznie msg z ProductsWorker, czyli JSON payload parsowany przez JSON.parse(msg, symbolize_names: true).",
   "type": "object",
