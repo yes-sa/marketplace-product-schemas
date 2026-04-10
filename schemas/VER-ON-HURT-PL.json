@@ -11,7 +11,10 @@
       "maxLength": 24
     },
     "parent_sku": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "minLength": 24,
       "maxLength": 24
     },
@@ -180,6 +183,13 @@
   "allOf": [
     {
       "if": {
+        "properties": {
+          "parent_sku": {
+            "type": "string",
+            "minLength": 24,
+            "maxLength": 24
+          }
+        },
         "required": [
           "parent_sku"
         ]
@@ -280,7 +290,10 @@
       "name": "Przykladowy produkt",
       "description": "Opis produktu",
       "meta_title": "Meta title",
-      "meta_keywords": ["bizuteria", "zloto"],
+      "meta_keywords": [
+        "bizuteria",
+        "zloto"
+      ],
       "meta_description": "Meta description",
       "price": 199.99,
       "published": true,
