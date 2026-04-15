@@ -20,7 +20,7 @@
       "items": {
         "type": "object"
       },
-      "minItems": 2
+      "minItems": 1
     },
     "gtin": {
       "type": "integer"
