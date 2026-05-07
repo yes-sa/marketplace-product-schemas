@@ -66,12 +66,12 @@
     "min_length": { "type": "integer" },
     "stones": { "type": "array" },
     "ore_color": { "type": "string" },
-    "different_extender": { "type": "boolean" },
+    "different_extender": { "type": "boolean" }
   },
   "required": [
     "name",
     "description",
     "product_type",
-    "sku",
+    "sku"
   ]
 }
