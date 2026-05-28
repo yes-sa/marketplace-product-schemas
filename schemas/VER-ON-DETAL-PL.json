@@ -20,7 +20,10 @@
     },
     "name": {
       "type": "string",
-      "minLength": 1
+      "maxLength": 70,
+      "not": {
+        "pattern": "^[A-ZĄĆĘŁŃÓŚŹŻ0-9\\s]+$"
+      }
     },
     "description": {
       "type": [
