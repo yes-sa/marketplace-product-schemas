@@ -21,9 +21,7 @@
     "name": {
       "type": "string",
       "maxLength": 70,
-      "not": {
-        "pattern": "^[A-ZĄĆĘŁŃÓŚŹŻ0-9\\s]+$"
-      }
+      "pattern": ".*[a-ząćęłńóśźż].*|^[0-9\\W]+$"
     },
     "description": {
       "type": [
