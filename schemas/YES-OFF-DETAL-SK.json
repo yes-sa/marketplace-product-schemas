@@ -2,131 +2,69 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ArticleData Message Schema",
   "type": "object",
+
   "properties": {
-    "sku": { "type": "string" },
-    "name": { "type": "string" },
-    "description": { "type": ["string", "null"] },
+    "sku": {
+      "type": "string"
+    },
 
-    "product_stock_category": { "type": "string" },
-    "tax_rate": { "type": "number" },
-    "jpk_group": { "type": ["string", "null"] },
+    "name": {
+      "type": "string"
+    },
 
-    "unit_symbol": { "type": "string" },
-    "unit_precision": { "type": ["integer", "null"] },
+    "description": {
+      "type": ["string", "null"]
+    },
 
-    "average_weight": { "type": ["number", "null"] },
-    "minimum_weight": { "type": ["number", "null"] },
+    "product_stock_category": {
+      "type": "string"
+    },
+
+    "tax_rate": {
+      "type": "number"
+    },
+
+    "unit_symbol": {
+      "type": "string"
+    },
+
+    "unit_precision": {
+      "type": ["integer", "null"]
+    },
 
     "sales_channels": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
 
-    "assortment_group": {
-      "type": ["string", "null"]
+    "has_serial_number": {
+      "type": "boolean"
     },
 
     "images": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/ImageData"
+        "$ref": "#/definitions/ImageData"
       }
     },
 
     "cdn_images": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/ImageData"
+        "$ref": "#/definitions/ImageData"
       }
     },
-
-    "has_serial_number": { "type": "boolean" },
-
-    "stock_features": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-
-    "gtin": { "type": ["integer", "string", "null"] },
-    "ean": { "type": ["integer", "string", "null"] },
-
-    "language": { "type": "string" },
-    "published": { "type": "boolean" },
-    "active": { "type": "boolean" },
-    "is_active": { "type": "boolean" },
-
-    "model": { "type": ["string", "null"] },
-    "product_type": { "type": ["string", "null"] },
-    "simple_type": { "type": ["string", "null"] },
 
     "stones": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/StoneData"
+        "$ref": "#/definitions/StoneData"
       }
-    },
-
-    "additional_stone": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-
-    "millesimal_fineness": { "type": ["string", "null"] },
-
-    "possible_engraver": { "type": "boolean" },
-    "ship_to_store": { "type": "boolean" },
-    "only_online": { "type": "boolean" },
-    "disable_yesclub": { "type": "boolean" },
-    "disable_promo": { "type": "boolean" },
-    "disable_bon_promo": { "type": "boolean" },
-    "regulation": { "type": "boolean" },
-    "decor": { "type": "boolean" },
-
-    "available_sizes": {
-      "type": "array",
-      "items": { "type": ["string", "number"] }
-    },
-
-    "for_whom": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-
-    "occasion": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-
-    "theme": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-
-    "themes": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-
-    "ores": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-
-    "categories": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-
-    "jewellery_type": {
-      "type": "array",
-      "items": { "type": "string" }
-    },
-
-    "zero_image_url": {
-      "type": ["string", "null"],
-      "format": "uri"
     }
   },
+
   "required": [
     "sku",
     "name",
@@ -136,17 +74,31 @@
     "sales_channels",
     "has_serial_number"
   ],
+
   "additionalProperties": true,
-  "$defs": {
+
+  "definitions": {
     "ImageData": {
       "type": "object",
       "properties": {
-        "alt": { "type": ["string", "null"] },
-        "default": { "type": "boolean" },
-        "thumbnail": { "type": "boolean" },
-        "title": { "type": ["string", "null"] },
-        "type": { "type": "string" },
-        "unix_timestamp": { "type": ["integer", "null"] },
+        "alt": {
+          "type": ["string", "null"]
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "thumbnail": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": ["string", "null"]
+        },
+        "type": {
+          "type": "string"
+        },
+        "unix_timestamp": {
+          "type": ["integer", "null"]
+        },
         "url": {
           "type": "string",
           "format": "uri"
@@ -155,16 +107,27 @@
       "required": ["url", "type"],
       "additionalProperties": true
     },
+
     "StoneData": {
       "type": "object",
       "properties": {
-        "stone": { "type": ["string", "null"] },
-        "color": { "type": ["string", "null"] },
-        "class": { "type": ["string", "null"] },
-        "weight": { "type": ["string", "number", "null"] },
+        "stone": {
+          "type": ["string", "null"]
+        },
+        "color": {
+          "type": ["string", "null"]
+        },
+        "class": {
+          "type": ["string", "null"]
+        },
+        "weight": {
+          "type": ["string", "number", "null"]
+        },
         "type": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": true
