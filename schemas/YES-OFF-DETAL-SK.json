@@ -1,0 +1,208 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ArticleData Message Schema",
+  "description": "Schemat walidujący komunikat danych artykułu (ArticleData) przesyłany przez brokera RabbitMQ, zgodnie z dokumentacją A-INT-001.",
+  "type": "object",
+  "properties": {
+    "SKU": {
+      "description": "Unikalny kod towaru.",
+      "type": "string"
+    },
+    "name": {
+      "description": "Nazwa artykułu w danym języku (Translation).",
+      "$ref": "#/$defs/Translation"
+    },
+    "product_stock_category": {
+      "description": "Kategoria artykułu wg słownika kategorii Altum.",
+      "type": "string"
+    },
+    "tax_rate": {
+      "description": "Stawka VAT (VatRate).",
+      "$ref": "#/$defs/VatRate"
+    },
+    "jpk_group": {
+      "description": "Grupa JPK, np. gtu_08.",
+      "type": "string"
+    },
+    "unit_symbol": {
+      "description": "Jednostka miary wg słownika Altum.",
+      "type": "string"
+    },
+    "unit_precission": {
+      "description": "Precyzja jednostki.",
+      "type": "integer"
+    },
+    "average_weight": {
+      "description": "Średnia waga produktu w PL wyrażona w gramach (waga brutto dla jednostki).",
+      "type": "number"
+    },
+    "description": {
+      "description": "Lista tłumaczeń opisów artykułu (Translation).",
+      "$ref": "#/$defs/Translation"
+    },
+    "attributes": {
+      "description": "Lista atrybutów artykułu (List<AttributeData>).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AttributeData"
+      }
+    },
+    "sales_channel": {
+      "description": "Lista grup kanałów sprzedaży (List<ArticleGroup>).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ArticleGroup"
+      }
+    },
+    "assortment_group": {
+      "description": "Grupa asortymentowa (ArticleGroup).",
+      "$ref": "#/$defs/ArticleGroup"
+    },
+    "images": {
+      "description": "Lista binariów dla artykułu (List<BinaryData>).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/BinaryData"
+      }
+    },
+    "Has_serial_number": {
+      "description": "Lista klas cech zasobów (List<ArticleFeature>).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ArticleFeature"
+      }
+    },
+    "Stock_features": {
+      "description": "Lista klas cech zasobów (List<ArticleFeature>).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ArticleFeature"
+      }
+    }
+  },
+  "required": [
+    "SKU",
+    "name",
+    "product_stock_category",
+    "tax_rate",
+    "unit_symbol",
+    "unit_precission",
+    "sales_channel",
+    "Has_serial_number"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Translation": {
+      "description": "Tłumaczenie (NameTranslation, DescriptionTranslation).",
+      "type": "object",
+      "properties": {
+        "LanguageCode": {
+          "description": "Kod ISO języka wg dostępnych w Altum, np.: pl-PL, cz-CZ.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Wartość tłumaczenia w wybranym języku.",
+          "type": "string"
+        }
+      },
+      "required": ["LanguageCode", "Value"]
+    },
+    "VatRate": {
+      "description": "Stawka VAT.",
+      "type": "object",
+      "properties": {
+        "VatGroupCode": {
+          "description": "Grupy stawek wg dostępnych w Altum, np.: PL, CZ.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Wartość stawki, np. 0,23. Typ Decimal.",
+          "type": "number"
+        },
+        "Status": {
+          "description": "1 = opodatkowana, 2 = Zwolniona, 3 = Nie podlega. Domyślnie 1.",
+          "type": "integer",
+          "enum": [1, 2, 3]
+        }
+      },
+      "required": ["VatGroupCode", "Value", "Status"]
+    },
+    "AttributeData": {
+      "description": "Dane Atrybutu.",
+      "type": "object",
+      "properties": {
+        "AttributeClassInternalName": {
+          "description": "Klasa atrybutu wg InternalName w Altum.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Wartość dla atrybutu (Liczbowy, Logiczny, Data w formacie en-US, Tekstowy bez tłumaczenia).",
+          "type": "string"
+        },
+        "ValueTranslation": {
+          "description": "Tłumaczenie wartości atrybutu tekstowego.",
+          "$ref": "#/$defs/Translation"
+        }
+      },
+      "required": ["AttributeClassInternalName", "Value"]
+    },
+    "ArticleGroup": {
+      "description": "Grupa Artykułu (SalesChannel, AssortmentGroup).",
+      "type": "object",
+      "properties": {
+        "CategoryType": {
+          "description": "Kategoria podziału zgodna ze słownikiem Altum, np.: Wg Asortymentu, Wg kanału dystrybucji.",
+          "type": "string"
+        },
+        "Code": {
+          "description": "Kod grupy.",
+          "type": "string"
+        },
+        "NameTranslation": {
+          "description": "Tłumaczenie nazwy grupy.",
+          "$ref": "#/$defs/Translation"
+        }
+      },
+      "required": ["CategoryType", "Code", "NameTranslation"]
+    },
+    "BinaryData": {
+      "description": "Dane Binarne/Załączniki (Images).",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "Unikalny kod załącznika.",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Nazwa załącznika.",
+          "type": "string"
+        },
+        "URL": {
+          "description": "Źródło załącznika.",
+          "type": "string",
+          "format": "url"
+        }
+      },
+      "required": ["Code", "Name", "URL"]
+    },
+    "ArticleFeature": {
+      "description": "Cecha Artykułu (Has_serial_number, Stock_features).",
+      "type": "object",
+      "properties": {
+        "FeatureName": {
+          "description": "Nazwa klasy cechy wg słownika Altum, np.: Rozmiar, Numer seryjny.",
+          "type": "string"
+        },
+        "IsRequired": {
+          "description": "Czy cecha wymagana przy zakupie (True dla numeru seryjnego, False dla pozostałych).",
+          "type": "boolean"
+        },
+        "IsLotInfluence": {
+          "description": "Czy cecha wpływa na partię, domyślnie true.",
+          "type": "boolean"
+        }
+      },
+      "required": ["FeatureName", "IsRequired", "IsLotInfluence"]
+    }
+  }
+}
