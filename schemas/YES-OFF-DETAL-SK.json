@@ -27,11 +27,11 @@
           "default": { "type": "boolean" },
           "thumbnail": { "type": "boolean" },
           "title": { "type": ["string", "null"] },
-          "type": { "type": "string" },
+          "type": { "type": ["string", "null"] },
           "unix_timestamp": { "type": ["integer", "null"] },
           "url": { "type": "string", "format": "uri" }
         },
-        "required": ["url", "type"],
+        "required": ["url"],
         "additionalProperties": true
       }
     },
