@@ -63,5 +63,8 @@
     "unit_precision",
     "has_serial_number"
   ],
+  "not": {
+    "required": ["ore"]
+  },
   "additionalProperties": true
 }
