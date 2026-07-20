@@ -20,7 +20,7 @@
     },
     "name": {
       "type": "string",
-      "maxLength": 70,
+      "maxLength": 90,
       "pattern": ".*[a-ząćęłńóśźż].*|^[0-9\\W]+$"
     },
     "description": {
