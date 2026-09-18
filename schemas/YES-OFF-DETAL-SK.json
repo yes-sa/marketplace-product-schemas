@@ -45,7 +45,7 @@
           "class": { "type": ["string", "null"] },
           "weight": { "type": ["string", "number", "null"] },
           "type": {
-            "type": "array",
+            "type": ["array", "null"],
             "items": { "type": "string" }
           }
         },
