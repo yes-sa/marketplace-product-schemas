@@ -151,14 +151,12 @@
             "minLength": 1
           },
           "class": {
-            "type": "string",
-            "minLength": 1
+            "type": "string"
           },
           "weight": {
             "oneOf": [
               {
-                "type": "string",
-                "minLength": 1
+                "type": "string"
               },
               {
                 "type": "number"
@@ -229,8 +227,7 @@
               ],
               "properties": {
                 "class": {
-                  "type": "string",
-                  "minLength": 1
+                  "type": "string"
                 }
               }
             }
@@ -268,8 +265,7 @@
                 "weight": {
                   "oneOf": [
                     {
-                      "type": "string",
-                      "minLength": 1
+                      "type": "string"
                     },
                     {
                       "type": "number"
@@ -320,6 +316,11 @@
           "stone": "Diament",
           "class": "SI",
           "weight": "0.10"
+        },
+        {
+          "stone": "Szkło",
+          "class": "",
+          "weight": ""
         }
       ],
       "gtin": "1234567890123"
